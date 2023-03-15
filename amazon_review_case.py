@@ -61,7 +61,7 @@ pd.set_option('display.width', 500)
 pd.set_option('display.expand_frame_repr', False)
 pd.set_option('display.float_format', lambda x: '%.5f' % x)
 
-df = pd.read_csv("C:/Users/Melekg/Desktop/Miuul/Miuul Dersler/Measurement Problems (Ölçümleme Problemleri)/Case Study I/Rating Product&SortingReviewsinAmazon/amazon_review.csv")
+df = pd.read_csv("C:/Users/.../amazon_review.csv")
 df.head()
 
 

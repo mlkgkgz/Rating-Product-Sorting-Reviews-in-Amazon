@@ -66,19 +66,16 @@ df.head()
 
 
 
-
-
-
-
 # Ürünün Ortalama Puanı
 
 #kaç benzersiz ürün var?
-df["asin"].value_counts() # tek bir ürün varmış
-# B007WTAJTO    4915
+df["asin"].value_counts() 
+
+
 
 # Ürünün Ortalama Puanı nedir?
 df.groupby("asin").agg({"overall": "mean"})
-#B007WTAJTO  4.58759
+
 
 
 
@@ -91,9 +88,6 @@ df["reviewTime"]
 
 df["reviewTime"] = pd.to_datetime(df["reviewTime"])
 
-# current_date = df["reviewTime"].max() #Timestamp('2014-12-07 00:00:00')
-
-# df["day_diff"] = (current_date - df["reviewTime"]).dt.days #ilk gözlem 138 gün önce yorum yapmış. bu değişken zaten df te var.
 
 df.groupby("day_diff").agg({"overall": "mean"}) #ürün ratinglerinin günlere göre ortalaması
 
@@ -107,18 +101,10 @@ df.loc[df["day_diff"]<=20, "overall"].mean() # son 20 gündeki yapılan yorumlar
 df["day_diff"].quantile([0.25, 0.5, 0.75])
 
 #25-50-75lik tarih dilimlerinde ürün ratinglerinin ortalaması
-#0.25000   281.00000 (ocak-nisan arası ürün ratinglerinin ortalaması)
+#0.25000   281.00000 
 #0.50000   431.00000
 #0.75000   601.00000
 
-
-# Dersteki ağırlıklar ile
-df.loc[df["day_diff"] <= 281, "overall"].mean() * 28/100 + \
-df.loc[(df["day_diff"] > 281) & (df["day_diff"] <= 431), "overall"].mean() * 26/100 + \
-df.loc[(df["day_diff"] > 431) & (df["day_diff"] <= 601), "overall"].mean() * 24/100 + \
-df.loc[(df["day_diff"] > 601), "overall"].mean() * 22/100
-
-# Out[35]: 4.595593165128118 Tarihe Göre Ağırlıklı Puan Ortalamasıdır.
 
 
 
@@ -135,7 +121,7 @@ df.loc[(df["day_diff"] > 601), "overall"].mean() * 28/100
 ###################################################
 # Görev 2: Ürün için Ürün Detay Sayfasında Görüntülenecek 20 Review'i Belirleyiniz.
 ###################################################
-df.head()
+
 
 ###################################################
 # Adım 1. helpful_no Değişkenini Üretiniz
@@ -147,10 +133,6 @@ df.head()
 # veri setinde helpful_no değişkeni yoktur, var olan değişkenler üzerinden üretilmesi gerekmektedir.
 
 
-df["total_vote"].count() #4915 tane up-down skoru var.
-
-df["helpful_yes"].count()
-
 
 #df["total_vote"] - df["helpful_yes"] Toplam oy sayısından (total_vote) yararlı oy sayısı (helpful_yes) çıkarılarak yararlı bulunmayan oy sayılarını (helpful_no) bulunuz.
 
@@ -161,7 +143,7 @@ df.head()
 
 df[df['helpful_yes'] != 0].count() #413 tane yorumu faydalı (up) bulan olmuş
 
-#df[df['helpful_no'] == 0].count() #4674
+
 
 ###################################################
 # Adım 2. score_pos_neg_diff, score_average_rating ve wilson_lower_bound Skorlarını Hesaplayıp Veriye Ekleyiniz
